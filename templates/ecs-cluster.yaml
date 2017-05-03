@@ -93,6 +93,11 @@ Resources:
         - Key: Name
           Value: !Sub ${AWS::StackName} - ECS Host
           PropagateAtLaunch: true
+          "Properties": 
+						"ImageId": !FindInMap [ AWSRegionToAMI, !Ref 'AWS::Region', AMI ]
+						"InstanceType": !Ref InstanceType
+						"IamInstanceProfile": !Ref InstanceProfile
+						"KeyName": Test
     CreationPolicy:
       ResourceSignal:
         Timeout: PT15M
